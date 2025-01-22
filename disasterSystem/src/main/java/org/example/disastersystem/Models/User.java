@@ -1,13 +1,10 @@
 package org.example.disastersystem.Models;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.*;
 
 @Entity
-@Table
+@Table(name = "userInfo")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -15,21 +12,23 @@ public class User {
     @NotEmpty(message = "Full name cannot be empty")
     private String fullName;
     @NotEmpty(message = "Please enter a phone number")
-    @Min(value=0,message = "Please enter a valid phone number")
-    @Max(value=10, message = "Please enter a valid phone number")
-    private int phoneNumber;
-    @Email(message = "Invalid email")
+    @Pattern(regexp = "^\\d{10}$", message = "Please enter a valid 10-digit phone number")
+    private String phoneNumber;
+    @Email(message = "Please enter a valid email address")
     private String emailAddress;
-    @NotEmpty(message = "Please enter a valid NIC number")
+    @Pattern(regexp = "^\\d{10}$", message = "Please enter a valid NIC number")
     private String nic;
     @NotEmpty(message = "Please enter a valid street address")
     private String streetAddress;
     @NotEmpty(message = "Please enter a valid Grama Niladhari Division")
     private String gramaDivision;
     @NotEmpty(message = "Please enter a valid District")
+    @Pattern(regexp = "^(?!Select District$).*$", message = "Please select a valid district")
     private String district;
     @NotEmpty(message = "Please enter a valid Province")
+    @Pattern(regexp = "^(?!Select Province$).*$", message = "Please select a valid province")
     private String province;
+
     @Transient
     private String confirmPassword;
 
@@ -49,30 +48,27 @@ public class User {
         this.fullName = fullName;
     }
 
-    @NotEmpty(message = "Please enter a phone number")
-    @Min(value = 0, message = "Please enter a valid phone number")
-    @Max(value = 10, message = "Please enter a valid phone number")
-    public int getPhoneNumber() {
+    public @NotEmpty(message = "Please enter a phone number") @Pattern(regexp = "^\\d{10}$", message = "Please enter a valid 10-digit phone number") String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(@NotEmpty(message = "Please enter a phone number") @Min(value = 0, message = "Please enter a valid phone number") @Max(value = 10, message = "Please enter a valid phone number") int phoneNumber) {
+    public void setPhoneNumber(@NotEmpty(message = "Please enter a phone number") @Pattern(regexp = "^\\d{10}$", message = "Please enter a valid 10-digit phone number") String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
-    public @Email(message = "Invalid email") String getEmailAddress() {
+    public @Email(message = "Please enter a valid email address") String getEmailAddress() {
         return emailAddress;
     }
 
-    public void setEmailAddress(@Email(message = "Invalid email") String emailAddress) {
+    public void setEmailAddress(@Email(message = "Please enter a valid email address") String emailAddress) {
         this.emailAddress = emailAddress;
     }
 
-    public @NotEmpty(message = "Please enter a valid NIC number") String getNic() {
+    public @Pattern(regexp = "^\\d{10}$", message = "Please enter a valid NIC number") String getNic() {
         return nic;
     }
 
-    public void setNic(@NotEmpty(message = "Please enter a valid NIC number") String nic) {
+    public void setNic(@Pattern(regexp = "^\\d{10}$", message = "Please enter a valid NIC number") String nic) {
         this.nic = nic;
     }
 
@@ -92,20 +88,20 @@ public class User {
         this.gramaDivision = gramaDivision;
     }
 
+    public @NotEmpty(message = "Please enter a valid Province") @Pattern(regexp = "^(?!Select Province$).*$", message = "Please select a valid province") String getProvince() {
+        return province;
+    }
+
+    public void setProvince(@NotEmpty(message = "Please enter a valid Province") @Pattern(regexp = "^(?!Select Province$).*$", message = "Please select a valid province") String province) {
+        this.province = province;
+    }
+
     public @NotEmpty(message = "Please enter a valid District") String getDistrict() {
         return district;
     }
 
     public void setDistrict(@NotEmpty(message = "Please enter a valid District") String district) {
         this.district = district;
-    }
-
-    public @NotEmpty(message = "Please enter a valid Province") String getProvince() {
-        return province;
-    }
-
-    public void setProvince(@NotEmpty(message = "Please enter a valid Province") String province) {
-        this.province = province;
     }
 
     public String getConfirmPassword() {
