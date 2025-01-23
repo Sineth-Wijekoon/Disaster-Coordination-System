@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <meta charset="UTF-8">
+  <title>පුද්ගලික තොරතුරු</title>
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-image: url('/dmc_bg.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .form-container {
+      background-color: #ffffff;
+      border: 2px solid #007bff;
+      padding: 30px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      width: 600px;
+      border-radius: 8px;
+    }
+
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .logo {
+      width: 350px;
+      height: auto;
+    }
+
+    .label-title {
+      display: block;
+      font-size: 30px; /* Adjust the font size of the label */
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+
+    .btn-primary {
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+<div class="form-container">
+  <form class="needs-validation" th:action="@{/dmc/save}" th:object="${user}" method="post">
+    <input type="hidden" name="lang" value="sinhala">
+    <div class="form-group text-center">
+      <img src="/dmc_logo_big.png" alt="Logo" class="logo">
+      <label class="label-title">
+        <span class="ml-2">පුද්ගලික තොරතුරු</span> <!-- Label text -->
+      </label>
+    </div>
+    <div class="form-group">
+      <label for="inputFullName">සම්පූර්ණ නම</label>
+      <input type="text" class="form-control" id="inputFullName" th:field="${user.fullName}">
+      <p th:if="${#fields.hasErrors('fullName')}" th:errorclass="text-danger" th:errors="${user.fullName}"></p>
+    </div>
+    <div class="form-group">
+      <label for="inputContactNumber">දුරකථන අංකය</label>
+      <input class="form-control" id="inputContactNumber" placeholder="(+94)" th:field="${user.phoneNumber}">
+      <p th:if="${#fields.hasErrors('phoneNumber')}" th:errorclass="text-danger" th:errors="${user.phoneNumber}"></p>
+    </div>
+    <div class="form-group">
+      <label for="inputEmail">ඊමේල් ලිපිනය (විකල්ප)</label>
+      <input type="text" class="form-control" id="inputEmail" placeholder="eg.user@email.com" th:field="${user.emailAddress}">
+      <p th:if="${#fields.hasErrors('emailAddress')}" th:errorclass="text-danger" th:errors="${user.emailAddress}"></p>
+    </div>
+    <div class="form-group">
+      <label for="inputNIC">ජාතික හැඳුනුම්පත අංකය</label>
+      <input type="text" class="form-control" id="inputNIC" placeholder="eg.123456789v" th:field="${user.nic}">
+      <p th:if="${#fields.hasErrors('nic')}" th:errorclass="text-danger" th:errors="${user.nic}"></p>
+    </div>
+    <div class="form-group">
+      <label for="inputProvince">පළාත</label>
+      <select id="inputProvince" class="form-select" th:field="${user.province}">
+        <option value="" selected>Select Province</option>
+        <option value="Western Province">බස්නාහිර පළාත</option>
+        <option value="Central Province">මධ්‍යම පළාත</option>
+        <option value="Eastern Province">නැගෙනහිර පළාත</option>
+        <option value="Northern Province">උතුරු පළාත</option>
+        <option value="North Western Province">වයඹ පළාත</option>
+        <option value="North Central Province">උතුරු මැද පළාත</option>
+        <option value="Sabaragamuwa Province">සබරගමුව පළාත</option>
+        <option value="Southern Province">දකුණු පළාත</option>
+        <option value="Uva Province">ඌව පළාත</option>
+      </select>
+      <p th:if="${#fields.hasErrors('province')}" th:errorclass="text-danger" th:errors="${user.province}"></p>
+    </div>
+    <div class="form-group">
+      <label for="inputDistrict">දිස්ත්රික්කය</label>
+      <select id="inputDistrict" class="form-select" th:field="${user.district}">
+        <option value="" selected>Select District</option>
+      </select>
+      <p th:if="${#fields.hasErrors('district')}" th:errorclass="text-danger" th:errors="${user.district}"></p>
+    </div>
+    <div class="form-group">
+      <label for="inputStreetAddress">වීථි ලිපිනය</label>
+      <input type="text" class="form-control" id="inputStreetAddress" placeholder="eg.Samagi Mawatha" th:field="${user.streetAddress}">
+      <p th:if="${#fields.hasErrors('streetAddress')}" th:errorclass="text-danger" th:errors="${user.streetAddress}"></p>
+    </div>
+    <div class="form-group">
+      <label for="inputGramaDivision">ග්‍රාම නිලධාරී වසම</label>
+      <input type="text" class="form-control" id="inputGramaDivision" placeholder="eg.Dematagoda" th:field="${user.gramaDivision}">
+      <p th:if="${#fields.hasErrors('gramaDivision')}" th:errorclass="text-danger" th:errors="${user.gramaDivision}"></p>
+    </div>
+
+    <div class="col-12">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script>
+  const districtsByProvince = {
+    "Western Province": ["Colombo", "Gampaha", "Kalutara"],
+    "Central Province": ["Kandy", "Matale", "Nuwara Eliya"],
+    "Eastern Province": ["Trincomalee", "Batticaloa", "Ampara"],
+    "Northern Province": ["Jaffna", "Kilinochchi", "Mannar", "Vavuniya", "Mullaitivu"],
+    "North Western Province": ["Kurunegala", "Puttalam"],
+    "North Central Province": ["Anuradhapura", "Polonnaruwa"],
+    "Sabaragamuwa Province": ["Ratnapura", "Kegalle"],
+    "Southern Province": ["Galle", "Matara", "Hambantota"],
+    "Uva Province": ["Badulla", "Monaragala"],
+  };
+
+  const provinceDropdown = document.getElementById("inputProvince");
+  const districtDropdown = document.getElementById("inputDistrict");
+
+  provinceDropdown.addEventListener("change", function () {
+    const selectedProvince = provinceDropdown.value;
+    const districts = districtsByProvince[selectedProvince] || [];
+
+    // Clear the District dropdown
+    districtDropdown.innerHTML = '<option selected>Select District</option>';
+
+    // Populate the District dropdown
+    districts.forEach((district) => {
+      const option = document.createElement("option");
+      option.value = district;
+      option.textContent = district;
+      districtDropdown.appendChild(option);
+    });
+  });
+</script>
+
+</body>
+</html>

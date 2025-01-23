@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url('/dmc_bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .form-container {
+            background-color: #ffffff;
+            border: 2px solid #007bff;
+            padding: 30px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            width: 600px;
+            border-radius: 8px;
+        }
+
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            width: 350px;
+            height: auto;
+        }
+
+        .label-title {
+            display: block;
+            font-size: 30px; /* Adjust the font size of the label */
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+
+        .btn-primary {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+<div class="form-container">
+    <form class="needs-validation">
+        <div class="form-group text-center">
+            <img src="/dmc_logo_big.png" alt="Logo" class="logo">
+            <label class="label-title">
+                <span class="ml-2">Home</span> <!-- Label text -->
+            </label>
+        </div>
+
+        <div class="col-12 d-flex gap-5">
+            <button type="button" class="btn btn-primary mr-3" onclick="window.location.href='/dmc/userinfo?lang=english';">English</button>
+            <button type="button" class="btn btn-primary" onclick="window.location.href='/dmc/userinfo?lang=sinhala';">සිංහල</button>
+        </div>
+
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+</body>
+</html>
