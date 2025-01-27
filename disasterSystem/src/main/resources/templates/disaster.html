@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <meta charset="UTF-8">
+  <title>Disaster Information</title>
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-image: url('/dmc_bg.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .form-container {
+      background-color: #ffffff;
+      border: 2px solid #007bff;
+      padding: 30px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      width: 400px;
+      border-radius: 8px;
+    }
+
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .logo {
+      width: 350px;
+      height: auto;
+    }
+
+    .label-title {
+      display: block;
+      font-size: 30px; /* Adjust the font size of the label */
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+
+    .btn-primary {
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+<div class="form-container">
+  <form class="needs-validation" th:action="@{/dmc/disasterinfo}" th:object="${disaster}" method="post" novalidate>
+    <input type="hidden" name="lang" value="english">
+    <div class="form-group text-center">
+      <img src="/dmc_logo_big.png" alt="Logo" class="logo">
+      <label class="label-title">
+        <span class="ml-2">Disaster Information</span> <!-- Label text -->
+      </label>
+    </div>
+    <div class="form-group">
+      <label for="disasterType">Type of Disaster</label>
+      <select id="disasterType" name="disasterType" class="form-select" th:field="*{disasterType}">
+        <option value="" selected>Type Of Disaster</option>
+        <option value="Flood">Flood</option>
+        <option value="Landslide">Landslide</option>
+        <option value="Earthquake">Earthquake</option>
+        <option value="Tsunami">Tsunami</option>
+        <option value="Cyclone">Cyclone</option>
+      </select>
+      <p th:if="${#fields.hasErrors('disasterType')}" th:errorclass="text-danger" th:errors="*{disasterType}"></p>
+    </div>
+    <div class="form-group">
+      <label for="disasterDate">Date</label>
+      <input class="form-control" id="disasterDate" name="disasterDate" placeholder="DD/MM/YYYY" th:field="${disaster.disasterDate}">
+      <p th:if="${#fields.hasErrors('disasterDate')}" th:errorclass="text-danger" th:errors="*{disasterDate}"></p>
+    </div>
+    <div class="form-group">
+      <label for="disasterTime">Time</label>
+      <input type="text" class="form-control" id="disasterTime" name="disasterTime" th:field="${disaster.disasterTime}">
+      <p th:if="${#fields.hasErrors('disasterTime')}" th:errorclass="text-danger" th:errors="*{disasterTime}"></p>
+    </div>
+    <div class="form-group">
+      <label for="disasterDescription">Description</label>
+      <input type="text" class="form-control" id="disasterDescription" name="disasterDescription" th:field="${disaster.disasterDescription}">
+      <p th:if="${#fields.hasErrors('disasterDescription')}" th:errorclass="text-danger" th:errors="*{disasterDescription}"></p>
+    </div>
+    <div class="form-group">
+      <label for="affectedIndividuals">No. Affected Individuals</label>
+      <input type="text" class="form-control" id="affectedIndividuals" name="affectedIndividuals" th:field="${disaster.affectedIndividuals}">
+      <p th:if="${#fields.hasErrors('affectedIndividuals')}" th:errorclass="text-danger" th:errors="*{affectedIndividuals}"></p>
+    </div>
+    <div class="form-group">
+      <label for="urgencyLevel">Urgency Level</label>
+      <select id="urgencyLevel" name="urgencyLevel" class="form-select" th:field="${disaster.urgencyLevel}">
+        <option value="" selected>Urgency Level</option>
+        <option value="Low">Low</option>
+        <option value="Medium">Medium</option>
+        <option value="Critical">Critical</option>
+      </select>
+      <p th:if="${#fields.hasErrors('urgencyLevel')}" th:errorclass="text-danger" th:errors="*{urgencyLevel}"></p>
+    </div>
+
+    <div class="col-12">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+    <div class="text-center">
+      <a href="/dmc/home">Return home</a>
+    </div>
+  </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</body>
+</html>

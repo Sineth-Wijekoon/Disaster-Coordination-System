@@ -6,7 +6,7 @@
   <title>පුද්ගලික තොරතුරු</title>
   <style>
     body, html {
-      height: 100%;
+      min-height: 100%;
       margin: 0;
       display: flex;
       justify-content: center;
@@ -22,7 +22,8 @@
       border: 2px solid #007bff;
       padding: 30px;
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-      width: 600px;
+      width: 100%;
+      max-width: 400px;
       border-radius: 8px;
     }
 
@@ -56,7 +57,7 @@
 
 <body>
 <div class="form-container">
-  <form class="needs-validation" th:action="@{/dmc/save}" th:object="${user}" method="post">
+  <form class="needs-validation" th:action="@{/dmc/userinfo}" th:object="${user}" method="post">
     <input type="hidden" name="lang" value="sinhala">
     <div class="form-group text-center">
       <img src="/dmc_logo_big.png" alt="Logo" class="logo">
@@ -119,7 +120,10 @@
     </div>
 
     <div class="col-12">
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="submit" class="btn btn-primary">ඉදිරිපත් කරන්න</button>
+    </div>
+    <div class="text-center">
+      <a href="/dmc/home">මුල් පිටුවට</a>
     </div>
   </form>
 </div>

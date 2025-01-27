@@ -7,7 +7,7 @@
   <title>Personal Information</title>
   <style>
     body, html {
-      height: 100%;
+      min-height: 100%;
       margin: 0;
       display: flex;
       justify-content: center;
@@ -23,7 +23,8 @@
       border: 2px solid #007bff;
       padding: 30px;
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-      width: 400px;
+      width: 100%;
+      max-width: 400px;
       border-radius: 8px;
     }
 
@@ -57,7 +58,7 @@
 
 <body>
 <div class="form-container">
-  <form class="needs-validation" th:action="@{/dmc/save}" th:object="${user}" method="post">
+  <form class="needs-validation" th:action="@{/dmc/userinfo}" th:object="${user}" method="post">
     <input type="hidden" name="lang" value="english">
     <div class="form-group text-center">
       <img src="/dmc_logo_big.png" alt="Logo" class="logo">
@@ -66,28 +67,28 @@
       </label>
     </div>
     <div class="form-group">
-      <label for="inputFullName">Full Name</label>
-      <input type="text" class="form-control" id="inputFullName" th:field="${user.fullName}">
-      <p th:if="${#fields.hasErrors('fullName')}" th:errorclass="text-danger" th:errors="${user.fullName}"></p>
+      <label for="fullName">Full Name</label>
+      <input type="text" class="form-control" name="fullName" id="fullName" th:field="${user.fullName}">
+      <p th:if="${#fields.hasErrors('fullName')}" th:errorclass="text-danger" th:errors="*{fullName}"></p>
     </div>
     <div class="form-group">
-      <label for="inputContactNumber">Contact Number</label>
-      <input class="form-control" id="inputContactNumber" placeholder="(+94)" th:field="${user.phoneNumber}">
-      <p th:if="${#fields.hasErrors('phoneNumber')}" th:errorclass="text-danger" th:errors="${user.phoneNumber}"></p>
+      <label for="phoneNumber">Contact Number</label>
+      <input class="form-control" id="phoneNumber" name="phoneNumber" placeholder="(+94)" th:field="${user.phoneNumber}">
+      <p th:if="${#fields.hasErrors('phoneNumber')}" th:errorclass="text-danger" th:errors="*{phoneNumber}"></p>
     </div>
     <div class="form-group">
-      <label for="inputEmail">Email Address (Optional)</label>
-      <input type="text" class="form-control" id="inputEmail" placeholder="eg.user@email.com" th:field="${user.emailAddress}">
-      <p th:if="${#fields.hasErrors('emailAddress')}" th:errorclass="text-danger" th:errors="${user.emailAddress}"></p>
+      <label for="emailAddress">Email Address (Optional)</label>
+      <input type="text" class="form-control" id="emailAddress" name="emailAddress" placeholder="eg.user@email.com" th:field="${user.emailAddress}">
+      <p th:if="${#fields.hasErrors('emailAddress')}" th:errorclass="text-danger" th:errors="*{emailAddress}"></p>
     </div>
     <div class="form-group">
-      <label for="inputNIC">National ID Number</label>
-      <input type="text" class="form-control" id="inputNIC" placeholder="eg.123456789v" th:field="${user.nic}">
-      <p th:if="${#fields.hasErrors('nic')}" th:errorclass="text-danger" th:errors="${user.nic}"></p>
+      <label for="nic">National ID Number</label>
+      <input type="text" class="form-control" id="nic" name="nic" placeholder="eg.123456789v" th:field="${user.nic}">
+      <p th:if="${#fields.hasErrors('nic')}" th:errorclass="text-danger" th:errors="*{nic}"></p>
     </div>
     <div class="form-group">
-      <label for="inputProvince">Province</label>
-      <select id="inputProvince" class="form-select" th:field="${user.province}">
+      <label for="province">Province</label>
+      <select id="province" name="province" class="form-select" th:field="${user.province}">
         <option value="" selected>Select Province</option>
         <option value="Western Province">Western Province</option>
         <option value="Central Province">Central Province</option>
@@ -99,28 +100,31 @@
         <option value="Southern Province">Southern Province</option>
         <option value="Uva Province">Uva Province</option>
       </select>
-      <p th:if="${#fields.hasErrors('province')}" th:errorclass="text-danger" th:errors="${user.province}"></p>
+      <p th:if="${#fields.hasErrors('province')}" th:errorclass="text-danger" th:errors="*{province}"></p>
     </div>
     <div class="form-group">
-      <label for="inputDistrict">District</label>
-      <select id="inputDistrict" class="form-select" th:field="${user.district}">
+      <label for="district">District</label>
+      <select id="district" name="district" class="form-select" th:field="${user.district}">
         <option value="" selected>Select District</option>
       </select>
-      <p th:if="${#fields.hasErrors('district')}" th:errorclass="text-danger" th:errors="${user.district}"></p>
+      <p th:if="${#fields.hasErrors('district')}" th:errorclass="text-danger" th:errors="*{district}"></p>
     </div>
     <div class="form-group">
-      <label for="inputStreetAddress">Street Address</label>
-      <input type="text" class="form-control" id="inputStreetAddress" placeholder="eg.Samagi Mawatha" th:field="${user.streetAddress}">
-      <p th:if="${#fields.hasErrors('streetAddress')}" th:errorclass="text-danger" th:errors="${user.streetAddress}"></p>
+      <label for="streetAddress">Street Address</label>
+      <input type="text" class="form-control" id="streetAddress" name="streetAddress" placeholder="eg.Samagi Mawatha" th:field="${user.streetAddress}">
+      <p th:if="${#fields.hasErrors('streetAddress')}" th:errorclass="text-danger" th:errors="*{streetAddress}"></p>
     </div>
     <div class="form-group">
-      <label for="inputGramaDivision">Grama Niladhari Division</label>
-      <input type="text" class="form-control" id="inputGramaDivision" placeholder="eg.Dematagoda" th:field="${user.gramaDivision}">
-      <p th:if="${#fields.hasErrors('gramaDivision')}" th:errorclass="text-danger" th:errors="${user.gramaDivision}"></p>
+      <label for="gramaDivision">Grama Niladhari Division</label>
+      <input type="text" class="form-control" id="gramaDivision" name="gramaDivision" placeholder="eg.Dematagoda" th:field="${user.gramaDivision}">
+      <p th:if="${#fields.hasErrors('gramaDivision')}" th:errorclass="text-danger" th:errors="*{gramaDivision}"></p>
     </div>
 
     <div class="col-12">
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="submit" class="btn btn-primary">Next</button>
+    </div>
+    <div class="text-center">
+      <a href="/dmc/home">Return home</a>
     </div>
   </form>
 </div>
@@ -141,8 +145,8 @@
     "Uva Province": ["Badulla", "Monaragala"],
   };
 
-  const provinceDropdown = document.getElementById("inputProvince");
-  const districtDropdown = document.getElementById("inputDistrict");
+  const provinceDropdown = document.getElementById("province");
+  const districtDropdown = document.getElementById("district");
 
   provinceDropdown.addEventListener("change", function () {
     const selectedProvince = provinceDropdown.value;

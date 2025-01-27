@@ -7,17 +7,15 @@ import jakarta.validation.constraints.*;
 @Table(name = "userInfo")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @NotEmpty(message = "Full name cannot be empty")
     private String fullName;
     @Pattern(regexp = "^\\d{9}$", message = "Please enter a valid phone number")
-    @NotEmpty(message = "Please enter a phone number")
     private String phoneNumber;
     @Email(message = "Please enter a valid email address")
     private String emailAddress;
     @Pattern(regexp = "^[0-9]{9}[vV]$", message = "Please enter a valid nic number")
-    @NotEmpty(message = "Please enter a phone number")
     private String nic;
     @NotEmpty(message = "Please enter a valid street address")
     private String streetAddress;
@@ -30,11 +28,15 @@ public class User {
     @Pattern(regexp = "^(?!Select Province$).*$", message = "Please select a valid province")
     private String province;
 
-    public int getId() {
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "disaster_id")
+    private Disaster disaster;
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -46,19 +48,19 @@ public class User {
         this.fullName = fullName;
     }
 
-    public @Pattern(regexp = "^\\d{9}$", message = "Please enter a valid phone number") @NotEmpty(message = "Please enter a phone number") String getPhoneNumber() {
+    public @Pattern(regexp = "^\\d{9}$", message = "Please enter a valid phone number") String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(@Pattern(regexp = "^\\d{9}$", message = "Please enter a valid phone number") @NotEmpty(message = "Please enter a phone number") String phoneNumber) {
+    public void setPhoneNumber(@Pattern(regexp = "^\\d{9}$", message = "Please enter a valid phone number") String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
-    public @Pattern(regexp = "^[0-9]{9}[vV]$", message = "Please enter a valid nic number") @NotEmpty(message = "Please enter a phone number") String getNic() {
+    public @Pattern(regexp = "^[0-9]{9}[vV]$", message = "Please enter a valid nic number") String getNic() {
         return nic;
     }
 
-    public void setNic(@Pattern(regexp = "^[0-9]{9}[vV]$", message = "Please enter a valid nic number") @NotEmpty(message = "Please enter a phone number") String nic) {
+    public void setNic(@Pattern(regexp = "^[0-9]{9}[vV]$", message = "Please enter a valid nic number") String nic) {
         this.nic = nic;
     }
 
@@ -100,5 +102,13 @@ public class User {
 
     public void setProvince(@NotEmpty(message = "Please enter a valid Province") @Pattern(regexp = "^(?!Select Province$).*$", message = "Please select a valid province") String province) {
         this.province = province;
+    }
+
+    public Disaster getDisaster() {
+        return disaster;
+    }
+
+    public void setDisaster(Disaster disaster) {
+        this.disaster = disaster;
     }
 }
