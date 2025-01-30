@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 
 @Controller
 @RequestMapping("dmc")
@@ -41,8 +42,9 @@ public class UserController {
     @GetMapping("/userinfo")
     public String newUser(Model model, @RequestParam(value = "lang", required = false, defaultValue = "english") String lang) {
 
+        model.addAttribute("user", new User());
         model.addAttribute("lang", lang); // Add language to model for view access
-        return getFormViewByLanguage(lang);
+        return getUserFormViewByLanguage(lang);
     }
 
     @PostMapping("/userinfo")
@@ -50,27 +52,27 @@ public class UserController {
                                @RequestParam(value = "lang", required = false, defaultValue = "english")String lang, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("lang", lang);
-            return getFormViewByLanguage(lang);
+            return getUserFormViewByLanguage(lang);
         }
 
-        return"redirect:/dmc/disaster";
+        model.addAttribute("user", user);
+
+        return"redirect:/dmc/disasterinfo";
     }
 
-    @GetMapping("/disaster")
-    public String disasterInfo(Model model, @SessionAttribute(value = "user", required = false) User sessionUser) {
-        if (sessionUser == null) {
-            // Redirect to userinfo if no user is in session
-            return "redirect:/dmc/userinfo";
-        }
+    @GetMapping("/disasterinfo")
+    public String disasterInfo(Model model, @RequestParam(value = "lang", required = false, defaultValue = "english") String lang) {
+
         model.addAttribute("disaster", new Disaster());
-        return "disaster";
+        model.addAttribute("lang", lang);
+        return getDisasterFormViewByLanguage(lang);
     }
 
 
     @PostMapping("/disasterinfo")
     @Transactional
     public String saveDisasterInfo(@Valid @ModelAttribute("disaster") Disaster disaster, BindingResult bindingResult,
-                                   @ModelAttribute("user") User user, Model model) {
+                                   @ModelAttribute("user") User user, Model model, SessionStatus sessionStatus) {
         System.out.println("User in session: " + user);
         if (bindingResult.hasErrors()) {
             return "disaster";
@@ -82,14 +84,25 @@ public class UserController {
 
         userRepository.save(user);
 
+        sessionStatus.setComplete();
+
+
         return "redirect:/dmc/success";
     }
 
-    private String getFormViewByLanguage(String lang) {
+    private String getUserFormViewByLanguage(String lang) {
         if ("sinhala".equals(lang)) {
             return "userEntrySinhala";
         } else {
             return "userEntryEnglish";
+        }
+    }
+
+    private String getDisasterFormViewByLanguage(String lang) {
+        if ("sinhala".equals(lang)) {
+            return "disasterSinhala";
+        } else {
+            return "disaster";
         }
     }
 

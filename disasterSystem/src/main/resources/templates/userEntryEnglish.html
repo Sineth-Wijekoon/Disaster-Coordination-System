@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +11,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background-image: url('/dmc_bg.jpg');
+      background-image: url('/dmc_bg_new.jpg');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -73,12 +72,12 @@
     </div>
     <div class="form-group">
       <label for="phoneNumber">Contact Number</label>
-      <input class="form-control" id="phoneNumber" name="phoneNumber" placeholder="(+94)" th:field="${user.phoneNumber}">
+      <input class="form-control" type="tel" id="phoneNumber" name="phoneNumber" placeholder="(+94)" th:field="${user.phoneNumber}">
       <p th:if="${#fields.hasErrors('phoneNumber')}" th:errorclass="text-danger" th:errors="*{phoneNumber}"></p>
     </div>
     <div class="form-group">
       <label for="emailAddress">Email Address (Optional)</label>
-      <input type="text" class="form-control" id="emailAddress" name="emailAddress" placeholder="eg.user@email.com" th:field="${user.emailAddress}">
+      <input type="email" class="form-control" id="emailAddress" name="emailAddress" placeholder="eg.user@email.com" th:field="${user.emailAddress}">
       <p th:if="${#fields.hasErrors('emailAddress')}" th:errorclass="text-danger" th:errors="*{emailAddress}"></p>
     </div>
     <div class="form-group">
