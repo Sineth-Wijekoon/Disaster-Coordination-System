@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <title>Cyclone</title>
+  <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+  <link href="/css/styles.css" rel="stylesheet" />
+  <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+  <style>
+    /* Table Border */
+    table {
+      width: 100%; /* Ensure table takes up full width */
+      border-collapse: collapse; /* Merge table borders into a single line */
+      margin: 20px 0;
+    }
+
+    th, td {
+      border: 1px solid black; /* Add a border to each cell */
+      padding: 8px; /* Space inside each cell */
+      text-align: left; /* Align text to the left */
+    }
+
+    th {
+      background-color: #f2f2f2; /* Background color for header */
+    }
+
+    /* Ensure columns adjust properly */
+    table {
+      table-layout: fixed; /* Fix column widths to match content or set width */
+    }
+
+    td, th {
+      word-wrap: break-word; /* Prevent content from overflowing */
+    }
+  </style>
+</head>
+<body class="sb-nav-fixed">
+<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+  <!-- Navbar Brand-->
+  <a class="navbar-brand ps-3" href="index.html">Disaster Management System</a>
+  <!-- Sidebar Toggle-->
+  <button class="btn btn-link btn-sm order-1 order-lg-0 ms-5 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+  <!-- Navbar-->
+  <ul class="navbar-nav ms-auto me-3 me-lg-4">
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+        <li><a class="dropdown-item" href="/dmc/home">Logout</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+<div id="layoutSidenav">
+  <div id="layoutSidenav_nav">
+    <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+      <div class="sb-sidenav-menu">
+        <div class="nav">
+          <div class="sb-sidenav-menu-heading">Core</div>
+          <a class="nav-link" href="/dmc/users">
+            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+            Dashboard
+          </a>
+        </div>
+      </div>
+      <div class="sb-sidenav-footer">
+        <div class="small">Logged in as:</div>
+        Admin
+      </div>
+    </nav>
+  </div>
+  <div id="layoutSidenav_content">
+    <main>
+      <div class="container-fluid px-4">
+        <h1 class="mt-4">DisasterType - Cyclone</h1>
+        <div class="card mb-4">
+          <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            User Information
+          </div>
+          <div class="card-body">
+            <table id="tableUserInfo">
+              <thead>
+              <tr>
+                <th>User ID</th>
+                <th>Full Name</th>
+                <th>Phone Number</th>
+                <th>Email</th>
+                <th>NIC</th>
+                <th>Street Address</th>
+                <th>Grama Niladhari Division</th>
+                <th>District</th>
+                <th>Province</th>
+              </tr>
+              </thead>
+              <tbody>
+              <!-- Loop through each user and display their data -->
+              <tr th:each="user : ${users}" >
+                <td th:text="${user.id}"></td>
+                <td th:text="${user.fullName}"></td>
+                <td th:text="${user.phoneNumber}"></td>
+                <td th:text="${user.emailAddress}"></td>
+                <td th:text="${user.nic}"></td>
+                <td th:text="${user.streetAddress}"></td>
+                <td th:text="${user.gramaDivision}"></td>
+                <td th:text="${user.district}"></td>
+                <td th:text="${user.province}"></td>
+              </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card mb-4">
+          <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            Disaster Information
+          </div>
+          <div class="card-body">
+            <table id="tableDisasterInfo">
+              <thead>
+              <tr>
+                <th>User ID</th>
+                <th>Disaster Type</th>
+                <th>Disaster Date</th>
+                <th>Disaster Time</th>
+                <th>Disaster Description</th>
+                <th>No. Affected Individuals</th>
+                <th>Urgency Level</th>
+              </tr>
+              </thead>
+              <tbody>
+
+              <tr th:each="disaster : ${disasters}" class="Disaster">
+                <td th:text="${disaster.id}"></td>
+                <td th:text="${disaster.disasterType}"></td>
+                <td th:text="${disaster.disasterDate}"></td>
+                <td th:text="${disaster.disasterTime}"></td>
+                <td th:text="${disaster.disasterDescription}"></td>
+                <td th:text="${disaster.affectedIndividuals}"></td>
+                <td th:text="${disaster.urgencyLevel}"></td>
+                <!-- Other disaster details -->
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="py-4 bg-light mt-auto">
+      <div class="container-fluid px-4">
+        <div class="d-flex align-items-center justify-content-between small">
+          <div class="text-muted">Copyright &copy; Your Website 2023</div>
+          <div>
+            <a href="#">Privacy Policy</a>
+            &middot;
+            <a href="#">Terms &amp; Conditions</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<script src="/js/scripts.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+<script src="assets/demo/chart-area-demo.js"></script>
+<script src="assets/demo/chart-bar-demo.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+<script src="js/datatables-simple-demo.js"></script>
+</body>
+</html>

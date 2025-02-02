@@ -28,9 +28,9 @@ public class UserController {
     @ModelAttribute("user")
     public User getUser(@SessionAttribute(value = "user", required = false) User sessionUser) {
         if (sessionUser != null) {
-            return sessionUser; // Use the existing session object
+            return sessionUser;
         }
-        return new User(); // Create a new User object if none exists
+        return new User();
     }
 
 
@@ -43,7 +43,7 @@ public class UserController {
     public String newUser(Model model, @RequestParam(value = "lang", required = false, defaultValue = "english") String lang) {
 
         model.addAttribute("user", new User());
-        model.addAttribute("lang", lang); // Add language to model for view access
+        model.addAttribute("lang", lang);
         return getUserFormViewByLanguage(lang);
     }
 
@@ -57,7 +57,7 @@ public class UserController {
 
         model.addAttribute("user", user);
 
-        return"redirect:/dmc/disasterinfo";
+        return "redirect:/dmc/disasterinfo";
     }
 
     @GetMapping("/disasterinfo")
@@ -73,7 +73,6 @@ public class UserController {
     @Transactional
     public String saveDisasterInfo(@Valid @ModelAttribute("disaster") Disaster disaster, BindingResult bindingResult,
                                    @ModelAttribute("user") User user, Model model, SessionStatus sessionStatus) {
-        System.out.println("User in session: " + user);
         if (bindingResult.hasErrors()) {
             return "disaster";
         }

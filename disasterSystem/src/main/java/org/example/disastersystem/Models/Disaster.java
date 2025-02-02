@@ -28,6 +28,9 @@ public class Disaster {
     @Pattern(regexp = "^(?!Urgency Level$).*$", message = "Please select the urgency level")
     private String urgencyLevel;
 
+    @Enumerated(EnumType.STRING)
+    private ReportStatus status = ReportStatus.PENDING;
+
     @OneToMany(mappedBy = "disaster")
     private List<User> users;
 
@@ -86,6 +89,14 @@ public class Disaster {
 
     public void setUrgencyLevel(@NotEmpty(message = "Please select the urgency level") @Pattern(regexp = "^(?!Urgency Level$).*$", message = "Please select the urgency level") String urgencyLevel) {
         this.urgencyLevel = urgencyLevel;
+    }
+
+    public ReportStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(ReportStatus status) {
+        this.status = status;
     }
 
     public List<User> getUsers() {
